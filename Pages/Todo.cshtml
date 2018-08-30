@@ -1,0 +1,39 @@
+@page "/todo"
+@using System.Collections.Generic;
+@inject SimpleViewBag simpleViewBag
+
+<h2>Todo list:</h2>
+
+<ul>
+@if (_items != null)
+{
+    @foreach(var item in _items)
+    {
+        <li class="todo-item">@item <button onclick="@(() => RemoveTodo(item))">Remove</button></li>
+    }
+}
+</ul>
+
+<input type="text" class="form-xcontrol" bind="@NewItem" />
+<button id="add-todo-btn" onclick="@AddTodo">Add</button>
+
+@functions {
+    private IEnumerable<string> _items;
+    private string NewItem;
+
+    protected override async Task OnInitAsync()
+    {
+        simpleViewBag.AddItem("First");
+        _items = simpleViewBag.GetItems();
+    }
+
+    private void AddTodo()
+    {
+        simpleViewBag.AddItem(NewItem);
+    }
+
+    private void RemoveTodo(string item)
+    {
+        simpleViewBag.RemoveItem(item);
+    }
+}
