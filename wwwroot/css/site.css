@@ -125,3 +125,7 @@ app {
 .todo-item {
     margin:8px 0;
 }
+
+#new-item-txt{
+    margin:0 10px 0 0;
+}

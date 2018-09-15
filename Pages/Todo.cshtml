@@ -3,19 +3,22 @@
 @inject SimpleViewBag simpleViewBag
 
 <h2>Todo list:</h2>
-
-<ul>
-@if (_items != null)
-{
-    @foreach(var item in _items)
+<div>
+    <ul>
+    @if (_items != null)
     {
-        <li class="todo-item">@item <button onclick="@(() => RemoveTodo(item))">Remove</button></li>
+        @foreach(var item in _items)
+        {
+            <li class="todo-item">@item <button class="btn btn-danger btn-sm" onclick="@(() => RemoveTodo(item))">Remove</button></li>
+        }
     }
-}
-</ul>
+    </ul>
+</div>
 
-<input type="text" class="form-xcontrol" bind="@NewItem" />
-<button id="add-todo-btn" onclick="@AddTodo">Add</button>
+<div class="form-inline">
+    <input type="text" class="form-control" id="new-item-txt" bind="@NewItem" />
+    <button id="add-todo-btn" class="btn btn-primary" onclick="@AddTodo">Add</button>
+</div>
 
 @functions {
     private IEnumerable<string> _items;
